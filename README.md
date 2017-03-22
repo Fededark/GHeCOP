@@ -1,2 +1,1 @@
-# GHeCOP
-GHeCOP (Global HealthCare Open Platform)
+# GHeCOP (Global HealthCare Open Platform)

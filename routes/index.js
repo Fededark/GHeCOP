@@ -1,4 +1,7 @@
 var express = require('express');
+
+var Hospital = require('../models/hospital');
+
 var router = express.Router();
 
 var isAuthenticated = function(req, res, next) {
@@ -28,7 +31,16 @@ module.exports = function(passport) {
 
     /* GET Registration Page */
     router.get('/signup', function(req, res) {
-        res.render('register', { message: req.flash('message') });
+        Hospital.find().
+        sort({ city: 1 }).
+        exec(function(err, hospitals) {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log(hospitals);
+                res.render('register', { message: req.flash('message'), hospitals: hospitals });
+            }
+        });
     });
 
     /* Handle Registration POST */

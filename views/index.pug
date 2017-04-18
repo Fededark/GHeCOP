@@ -1,18 +1,26 @@
 extends layout
 
 block content
-	div.container
-		div.row
-			div.col-sm-6.col-md-4.col-md-offset-4
-				h1.text-center.login-title Sign in to our Passport app
-					div.account-wall
-						img(class='profile-img', src='https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120')
+	div.container.full-heigth
+		div.row.align-items-center.full-heigth
+			div.col-12
+				div.row.justify-content-center
+					div.col-12
+						h1.text-center.login-title.p-3 Global Healthcare Platform
+							div.account-wall
+								img(class='profile-img rounded-circle', src='https://ssl.gstatic.com/accounts/ui/avatar_2x.png')
+				div.row.justify-content-center
+					div.col-sm-12.col-lg-4.col-lg-offset-4
 						form(class='form-signin', action='/login', method='POST')
-							input(type='text', name='username' class='form-control', placeholder='Email',required, autofocus)
-							input(type='password', name='password' class='form-control', placeholder='Password', required)
-							button(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
-							span.clearfix
-					a(href='/signup', class='text-center new-account') Create an account
-					#message
-					if message
-						h1.text-center.error-message #{message}
+							div.form-group
+								input(type='text', name='username' class='form-control form-control-lg', placeholder='Email', aria-describedby="emailHelp", required, autofocus)
+							div.form-group
+								input(type='password', name='password' class='form-control form-control-lg', placeholder='Password', required)
+							div.form-group
+								button(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
+								span.clearfix
+						p.text-center
+							a(href='/signup') Create an account
+						#message
+							if message
+								h1.text-center.error-message #{message}

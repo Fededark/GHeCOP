@@ -1,4 +1,4 @@
 module.exports = {
-    //'url': 'mongodb://Fededark:U5Yr&&kZTE!YruiD@tastbaar.mongo.xervo.io:27017/vI7dames'
-    'url': 'mongodb://localhost/test'
+    'url': 'mongodb://213.32.69.241/ghecop'
+        //'url': 'mongodb://localhost/test'
 }

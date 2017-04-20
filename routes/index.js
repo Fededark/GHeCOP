@@ -1,6 +1,8 @@
 var express = require('express');
+var addPatient = require('./addpatient');
 
 var Hospital = require('../models/hospital');
+var Patient = require('../models/patient');
 
 var router = express.Router();
 
@@ -22,6 +24,13 @@ module.exports = function(passport) {
         res.render('index', { message: req.flash('message') });
     });
 
+    router.post('/addpatient', function(req, res) {
+        if (addPatient(req.body)) {
+            console.log("Patient added");
+            res.redirect('/user');
+        }
+    });
+
     /* Handle Login POST */
     router.post('/login', passport.authenticate('login', {
         successRedirect: '/user',
@@ -37,7 +46,6 @@ module.exports = function(passport) {
             if (err) {
                 console.error(err);
             } else {
-                console.log(hospitals);
                 res.render('register', { message: req.flash('message'), hospitals: hospitals });
             }
         });
@@ -52,7 +60,18 @@ module.exports = function(passport) {
 
     /* GET Home Page */
     router.get('/user', isAuthenticated, function(req, res) {
-        res.render('user', { user: req.user });
+        Patient.find().
+        where('doctor').equals(req.user._id).
+        sort({ 'name.last': 1 }).
+        exec(function(err, patients) {
+            if (err) {
+                console.error(err);
+            } else {
+                res.render('user', { user: req.user, patients: patients });
+            }
+        });
+        //console.log(req.user);
+        //res.render('user', { user: req.user });
     });
 
     /* Handle Logout */

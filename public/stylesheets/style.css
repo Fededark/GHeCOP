@@ -42,6 +42,7 @@ body {
 }
 
 #navbarDropdownMenuLink {
+    margin-right: 1.5em;
     color: rgba(255, 255, 255, 1);
 }
 
@@ -54,8 +55,31 @@ body {
     background: center center no-repeat url("/images/add_small.png");
     background-color: #3F51B5;
     cursor: pointer;
+    border: 0;
+    padding: 0;
+    box-shadow: 2px 2px 5px 1px #aaa;
 }
 
 #add-patient:focus {
     outline: none;
+}
+
+.add-patient-form {
+    position: relative;
+    z-index: 999;
+}
+
+.shadow-background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(85, 85, 85, .35)
+}
+
+.help-img {
+    color: #888;
+}
+
+#basicAddon {
+    max-width: 100px;
 }

@@ -17,12 +17,12 @@ module.exports = function(passport) {
                 User.findOne({ 'email': email }, function(err, user) {
                     // In case of any error, return using the done method
                     if (err) {
-                        console.log('Error in SignUp: ' + err);
+                        //console.log('Error in SignUp: ' + err);
                         return done(err);
                     }
                     // already exists
                     if (user) {
-                        console.log('User already exists with email: ' + email);
+                        //console.log('User already exists with email: ' + email);
                         return done(null, false, req.flash('message', 'User Already Exists'));
                     } else {
                         // if there is no user with that email
@@ -31,8 +31,8 @@ module.exports = function(passport) {
 
                         // set the user's local credentials
                         //newUser.key = apikey();
-                        newUser.firstName = req.body.firstName;
-                        newUser.lastName = req.body.lastName;
+                        newUser.name.first = req.body.firstName;
+                        newUser.name.last = req.body.lastName;
                         newUser.birthdate = Date.parse(req.body.birthdate);
                         newUser.hospital = req.body.hospital;
                         newUser.email = req.body.email;
@@ -41,10 +41,10 @@ module.exports = function(passport) {
                         // save the user
                         newUser.save(function(err) {
                             if (err) {
-                                console.log('Error in Saving user: ' + err);
+                                //console.log('Error in Saving user: ' + err);
                                 throw err;
                             }
-                            console.log('User Registration succesful');
+                            //console.log('User Registration succesful');
                             return done(null, newUser);
                         });
                     }

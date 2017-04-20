@@ -8,16 +8,62 @@ block content
 			div.collapse.navbar-collapse.justify-content-end
 				ul.navbar-nav
 					li.nav-item.dropdown
-						a.nav-link.dropdown-toggle(href="http://example.com", id="navbarDropdownMenuLink", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") #{user.firstName} #{user.lastName}
+						a.nav-link.dropdown-toggle(href="http://example.com", id="navbarDropdownMenuLink", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") #{user.name.first} #{user.name.last}
 						div.dropdown-menu(aria-labelledby="navbarDropdownMenuLink")
 							a.dropdown-item(href="/signout") Sign Out
 		div#user-interface.container-fluid
 			div#interface-content.row
 				sidebar.col-md-2.border-right
 					| Sidebar
+
 				main#patients.col-md-6.border-right
 					h2 Pazienti
-					button#add-patient.rounded-circle
+					button#add-patient.rounded-circle(onclick="toggleAddPatient()")
+					each patient in patients 
+						.row
+							.col-sm-3 #{patient.name.first} #{patient.name.last}
 
 				div#patient-info.col-md-4
 					| Info Paziente
+
+			div.row.justify-content-center.align-items-center.shadow-background.invisible
+				div.col-4
+					div(class="jumbotron add-patient-form")
+						button#closeAddPatient.close(type="button" aria-label="Close", onclick="toggleAddPatient()")
+							span(aria-hidden="true") &times;
+						h1(class="display-3 text-center") ADD PATIENT
+						hr(class="my-4")
+						form(class='form-patient', action='/addpatient', method='POST')
+							div.form-group.row
+								label.col-sm-3.col-form-label.col-form-label-lg(for="patientFirstName") First name
+								.col-sm-9
+									input#patientFirstName(type='text', name='firstName', class='form-control form-control-lg', placeholder='First Name',required)
+							div.form-group.row
+								label.col-sm-3.col-form-label.col-form-label-lg(for="patientLastname") Last name
+								.col-sm-9
+									input#patientLastname(type='text', name='lastName', class='form-control form-control-lg', placeholder='Last Name',required)
+							div.form-group.row
+								label.col-sm-3.col-form-label.col-form-label-lg(for="patientBirthdate") Birthdate
+								.col-sm-9
+									input#patientBirthdate(type='date', name='birthdate', class='form-control form-control-lg', required)
+							.form-group.row
+								label.col-sm-3.col-form-label.col-form-label-lg(for="patientAddress") Address
+								.col-sm-9.input-group
+									input#patientAddress(type='text', name='street', class='form-control form-control-lg', aria-describedby="basicAddon", required)
+									input#basicAddon.input-group-addon(type='text', name='number', class='form-control form-control-lg', required)
+							div.form-group.row
+								label.col-sm-3.col-form-label.col-form-label-lg(for="patientCode") Code   
+									img.help-img(src="/images/help_small.png", data-toggle="tooltip" title="If your hospital provides a code for the patient, you can put it here.")
+								.col-sm-9
+									input#patientCode(type='text', name='code', class='form-control form-control-lg', placeholder='Patient code (Optional)')
+							div.form-group.row
+								label.col-sm-3.col-form-label.col-form-label-lg(for="patientLocation") Location
+								.col-sm-9
+									select#patientLocation.form-control.form-control-lg(name='location')
+										option(value="hospital") Hospital
+										option(value="home") Home
+							div.form-group
+								input(type="hidden", name="doctor_id", value=user._id)
+							div.form-group.row.justify-content-center
+								.col-md-4
+									button(class='btn btn-lg btn-primary btn-block', type='submit') Add

@@ -2,8 +2,7 @@ var moongose = require("mongoose");
 
 var userSchema = moongose.Schema({
     //key: String,
-    firstName: String,
-    lastName: String,
+    name: { first: String, last: String },
     birthdate: String,
     hospital: String,
     email: String,

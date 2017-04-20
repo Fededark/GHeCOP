@@ -1,10 +1,9 @@
 var mongoose = require("mongoose");
 
 var patientSchema = mongoose.Schema({
-    firstName: String,
-    lastName: String,
+    name: { first: String, last: String },
     birthDate: String,
-    address: { street: String, number: Number },
+    address: { street: String, number: String },
     code: String,
     doctor: String,
     in_hospital: Boolean,

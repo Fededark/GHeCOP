@@ -27,7 +27,8 @@
   <rdfs:label xml:lang="en">Doctor</rdfs:label>
   <rdfs:label xml:lang="it">Dottore</rdfs:label>
   <owl:sameAs rdf:resource="#Person"/>
-  <rdfs:comment>Describe a doctor</rdfs:comment>
+  <rdfs:comment xml:lang="en">Describe a doctor</rdfs:comment>
+  <rdfs:comment xml:lang="it">Descrive un dottore</rdfs:comment>
   <rdfs:isDefinedBy rdf:resource="http://ghecop.com/ontology/gheco#"/>
 </owl:Class>
 

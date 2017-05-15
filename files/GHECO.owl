@@ -7,7 +7,8 @@
     xmlns:rdfs ="http://www.w3.org/2000/01/rdf-schema#">
 
 <owl:Ontology rdf:about="http://ghecop.com/ontology/gheco"> 
-  <rdfs:comment>An ontology to describe healthcare operation and entities</rdfs:comment>
+  <rdfs:comment xml:lang="en">An ontology to describe healthcare operation and entities</rdfs:comment>
+  <rdfs:comment xml:lang="it">Un'ontologia che descrive operazioni ed entità relative all'healthcare</rdfs:comment>
   <rdfs:label>Global Healthcare Ontology</rdfs:label>
 </owl:Ontology>
 
@@ -18,7 +19,8 @@
   <rdfs:label xml:lang="en">Patient</rdfs:label>
   <rdfs:label xml:lang="it">Paziente</rdfs:label>
   <owl:sameAs rdf:resource="#Person"/>
-  <rdfs:comment>Describe a patient</rdfs:comment>
+  <rdfs:comment xml:lang="en">Describe a patient</rdfs:comment>
+  <rdfs:comment xml:lang="it">Descrive un paziente</rdfs:comment>
   <rdfs:isDefinedBy rdf:resource="http://ghecop.com/ontology/gheco#"/>
 </owl:Class>
 
@@ -32,15 +34,22 @@
   <rdfs:isDefinedBy rdf:resource="http://ghecop.com/ontology/gheco#"/>
 </owl:Class>
 
-<owl:Class rdf:ID="WearableThing">
-  <rdfs:comment>Describe a wearable object</rdfs:comment>
+<owl:Class rdf:ID="WearableDevice">
+  <rdfs:label xml:lang="en">Wereable Device</rdfs:label>
+  <rdfs:label xml:lang="it">Dispositivo Indossabile</rdfs:label>
+  <rdfs:comment xml:lang="en">Describe a wearable device</rdfs:comment>
+  <rdfs:comment xml:lang="it">Descrive un dispositivo indossabile</rdfs:comment>
 </owl:Class>
 
 <!-- Object Properties -->
 
-<owl:ObjectProperty rdf:ID="is_attended">
+<owl:ObjectProperty rdf:ID="isAttended">
   <rdfs:domain rdf:resource="#Patient"/>
   <rdfs:range rdf:resource="#Doctor"/>
+  <rdfs:label xml:lang="en">Is attended</rdfs:label>
+  <rdfs:label xml:lang="it">Viene curato</rdfs:label>
+  <rdfs:comment xml:lang="en">A link to the doctor who attend this patient</rdfs:comment>
+  <rdfs:comment xml:lang="it">Un collegamento al dottore curante del paziente</rdfs:comment>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:ID="wear">
@@ -65,7 +74,7 @@
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:ID="hospital_code">
+<owl:DatatypeProperty rdf:ID="hospitalCode">
   <rdfs:domain rdf:resource="#Patient"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
 </owl:DatatypeProperty>

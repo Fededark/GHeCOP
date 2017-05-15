@@ -54,7 +54,7 @@
 
 <owl:ObjectProperty rdf:ID="wear">
   <rdfs:domain rdf:resource="#Patient"/>
-  <rdfs:range rdf:resource="#WearableThing"/>
+  <rdfs:range rdf:resource="#WearableDevice"/>
 </owl:ObjectProperty>
 
 <!-- Data Properties -->
@@ -80,7 +80,7 @@
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:ID="idCode">
-  <rdfs:domain rdf:resource="#WearableThing"/>
+  <rdfs:domain rdf:resource="#WearableDevice"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </owl:DatatypeProperty>
 

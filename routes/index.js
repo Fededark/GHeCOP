@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var addPatient = require('./addpatient');
 
 var Hospital = require('../models/hospital');
@@ -78,6 +79,27 @@ module.exports = function(passport) {
     router.get('/signout', function(req, res) {
         req.logout();
         res.redirect('/');
+    });
+
+    router.get('/ontology', function(req, res) {
+        var filesDir = path.dirname(__dirname);
+
+        var options = {
+            root: filesDir + '/files',
+            headers: {
+                'x-timestamp': Date.now(),
+                'x-sent': true
+            }
+        }
+
+        var fileName = 'GHECO.owl';
+        res.sendFile(fileName, options, function(err) {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log('Sent:', fileName);
+            }
+        });
     });
 
     return router;

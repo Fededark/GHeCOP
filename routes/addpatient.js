@@ -6,6 +6,7 @@ module.exports = function(patient) {
 
     newPatient.name.first = patient.firstName;
     newPatient.name.last = patient.lastName;
+    newPatient.sex = patient.sex;
     newPatient.birthDate = patient.birthdate;
     newPatient.address.street = patient.street;
     newPatient.address.number = patient.number;

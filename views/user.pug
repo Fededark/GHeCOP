@@ -43,6 +43,12 @@ block content
 								.col-sm-9
 									input#patientLastname(type='text', name='lastName', class='form-control form-control-lg', placeholder='Last Name',required)
 							div.form-group.row
+								label.col-sm-3.col-form-label.col-form-label-lg(for="patientSex") Location
+								.col-sm-9
+									select#patientSex.form-control.form-control-lg(name='sex')
+										option(value="Male") Hospital
+										option(value="Female") Home
+							div.form-group.row
 								label.col-sm-3.col-form-label.col-form-label-lg(for="patientBirthdate") Birthdate
 								.col-sm-9
 									input#patientBirthdate(type='date', name='birthdate', class='form-control form-control-lg', required)

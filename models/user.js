@@ -8,6 +8,8 @@ var userSchema = moongose.Schema({
     email: String,
     password: String,
     phone: String,
+    admin: Boolean,
+    medic: Boolean,
     created: { type: Date, default: Date.now },
     updated: { type: Date, default: Date.now }
 })

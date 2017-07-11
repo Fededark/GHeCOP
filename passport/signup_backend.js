@@ -1,11 +1,10 @@
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user');
 var bCrypt = require('bcrypt-nodejs');
-var apikey = require('apikeygen').apikey;
 
 module.exports = function(passport) {
 
-    passport.use('signup', new LocalStrategy({
+    passport.use('signupBackend', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true // allows us to pass back the entire request to the callback
@@ -21,40 +20,30 @@ module.exports = function(passport) {
                         return done(err);
                     }
                     // already exists
-                    if (user && !user.admin) {
-                        // L'utente esiste e non è admin
-                        console.log("L'utente esiste ma è admin");
+                    if (user && user.admin) {
+                        console.log(user);
+                        //console.log('User already exists with email: ' + email);
                         return done(null, false, req.flash('message', 'User Already Exists'));
-                    } 
-                    if (user && !user.medic) {
-                        // L'utente esiste ma è admin
-                        console.log("L'utente esiste ma è admin");
-                        user.birthdate = Date.parse(req.body.birthdate);
-                        user.hospital = req.body.hospital;
-                        user.phone = req.body.tel;
-                        user.medic = true;
-                        user.created = user.created;
-                        user.updated = Date.now;
+                    } else if (user && !user.admin) {
+                        // L'utente esiste ma non è admin
+                        user.admin = true;
                         user.save(function(err) {
                             if(err)
                                 throw err;
                             return done(null, user);
                         });
                     } else {
-                        // L'utente non esiste o l'email è utilizzata da un admin
+                        // if there is no user with that email
                         // create the user
                         var newUser = new User();
 
                         // set the user's local credentials
                         newUser.name.first = req.body.firstName;
                         newUser.name.last = req.body.lastName;
-                        newUser.birthdate = Date.parse(req.body.birthdate);
-                        newUser.hospital = req.body.hospital;
                         newUser.email = req.body.email;
-                        newUser.admin = false;
-                        newUser.medic = true;
+                        newUser.admin = true;
+                        newUser.medic = false;
                         newUser.password = createHash(password);
-                        newUser.phone = req.body.tel;
                         // save the user
                         newUser.save(function(err) {
                             if (err) {

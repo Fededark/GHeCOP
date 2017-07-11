@@ -4,7 +4,7 @@ var bCrypt = require('bcrypt-nodejs');
 
 module.exports = function(passport) {
 
-    passport.use('login', new LocalStrategy({
+    passport.use('loginBackend', new LocalStrategy({
             passReqToCallback: true
         },
         function(req, email, password, done) {
@@ -15,7 +15,7 @@ module.exports = function(passport) {
                     if (err)
                         return done(err);
                     // email does not exist, log the error and redirect back
-                    if (!user || !user.medic) {
+                    if (!user || !user.admin) {
                         //console.log('User Not Found with email ' + email);
                         return done(null, false, req.flash('message', 'User Not found.'));
                     }

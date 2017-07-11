@@ -25,8 +25,4 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/user/:heartbeat/:apikey', function(req, res) {
-
-});
-
 module.exports = router;

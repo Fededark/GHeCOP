@@ -1,5 +1,7 @@
 var login = require('./login');
 var signup = require('./signup');
+var loginBackend = require('./login_backend');
+var signupBackend = require('./signup_backend');
 var User = require('../models/user');
 
 module.exports = function(passport) {
@@ -20,6 +22,8 @@ module.exports = function(passport) {
 
     // Setting up Passport Strategies for Login and SignUp/Registration
     login(passport);
+    loginBackend(passport);
     signup(passport);
+    signupBackend(passport);
 
 }

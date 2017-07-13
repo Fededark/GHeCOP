@@ -49,7 +49,7 @@ module.exports = function(passport) {
 
     /* Handle Registration POST */
     router.post('/signup', passport.authenticate('signup', {
-        successRedirect: '/user',
+        successRedirect: '/user', // You may want to redirect to a phone number check page
         failureRedirect: '/signup',
         failureFlash: true
     }));
@@ -63,7 +63,6 @@ module.exports = function(passport) {
                 console.error(err);
             } 
             if(admin.length == 0) {
-                console.log('Nessun admin presente');
                 res.render('register_first_admin', { message: req.flash('message'), title: "Admin registration" });
             } else 
                 res.redirect('/backend');
@@ -114,8 +113,6 @@ module.exports = function(passport) {
                 res.render('user', { user: req.user, patients: patients, title: "Dashboard - "+req.user.name.first+" "+req.user.name.last });
             }
         });
-        //console.log(req.user);
-        //res.render('user', { user: req.user });
     });
 
     router.post('/addpatient', function(req, res) {
@@ -194,17 +191,6 @@ module.exports = function(passport) {
     const wss = new WebServer.Server({ port: 8080 });
 
     wss.on('connection', function connection(ws) {
-        
-        /*
-            Quando ricevo una connessione:
-            1 - Estraggo il codice del dottore
-            2 - Creo un JSON Object obj = {
-                medic: medic_id,
-                webSocket: ws 
-            }
-            3 - Salvo ws nel JSON Array
-            4 - Invio messaggio di benvenuto
-        */
 
         console.log("Connection established");
         var welcomeMessage = {
@@ -215,7 +201,6 @@ module.exports = function(passport) {
         }
 
         ws.on('message', function incoming(msg) {
-            //console.log(webSocketArray);
             var message = JSON.parse(msg);
             var action = message.action;
             switch(action) {
@@ -235,28 +220,12 @@ module.exports = function(passport) {
             }
         });
 
-        /*
-        var simulateHeartBeat = function() {
-            var min = 55;
-            var max = 75;
-            var heart_rate = Math.floor(Math.random() * (max - min + 1)) + min;
-            var data = {
-                device: "heart_monitor01",
-                action: "update",
-                data: heart_rate
-            };
-
-            wsSendData(ws, data);   
-        }
-
-        setInterval(simulateHeartBeat, 1000);*/
     });
 
-    // WS per la connessione dei device
     const deviceWSS = new WebServer.Server({ port: 8081 });
 
     deviceWSS.on('connection', function connection(ws) {
-
+        // Define device connection behavior
     });
 
     return router;
